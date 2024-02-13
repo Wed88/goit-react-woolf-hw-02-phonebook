@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
+import { Form, Label, Input, ButtonSubmit } from './ContactForm.styled';
 
 export default class ContactForm extends Component {
   state = {
@@ -42,9 +43,9 @@ export default class ContactForm extends Component {
     const { name, number } = this.state;
 
     return (
-      <form onSubmit={hendleSubmit}>
-        <label htmlFor={nameImputId}>Name</label>
-        <input
+      <Form onSubmit={hendleSubmit}>
+        <Label htmlFor={nameImputId}>Name</Label>
+        <Input
           type="text"
           name="name"
           value={name}
@@ -53,8 +54,8 @@ export default class ContactForm extends Component {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
         />
-        <label htmlFor={numberImputId}>Number</label>
-        <input
+        <Label htmlFor={numberImputId}>Number</Label>
+        <Input
           type="tel"
           name="number"
           value={number}
@@ -63,8 +64,8 @@ export default class ContactForm extends Component {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
         />
-        <button type="submit">Add contact</button>
-      </form>
+        <ButtonSubmit type="submit">Add contact</ButtonSubmit>
+      </Form>
     );
   }
 }

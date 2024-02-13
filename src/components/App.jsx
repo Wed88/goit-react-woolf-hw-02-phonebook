@@ -49,7 +49,7 @@ export default class App extends Component {
     );
 
     return (
-      <div>
+      <div style={{ padding: '20px' }}>
         <h1>Phonebook</h1>
         <ContactForm onSubmitContact={formOnSubmitContact} />
         <h2>Contacts</h2>
