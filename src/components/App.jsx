@@ -33,8 +33,15 @@ export default class App extends Component {
     this.setState({ filter: event.currentTarget.value });
   };
 
+  deleteContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+  };
+
   render() {
-    const { changeFilter, filterImputId, formOnSubmitContact } = this;
+    const { changeFilter, filterImputId, formOnSubmitContact, deleteContact } =
+      this;
     const { contacts, filter } = this.state;
     const normalizedFilter = this.state.filter.toLowerCase();
     const visibledContacts = contacts.filter(contact =>
@@ -47,7 +54,10 @@ export default class App extends Component {
         <ContactForm onSubmitContact={formOnSubmitContact} />
         <h2>Contacts</h2>
         <Filter id={filterImputId} value={filter} changeFilter={changeFilter} />
-        <ContactList contacts={visibledContacts} />
+        <ContactList
+          contacts={visibledContacts}
+          onDeleteContact={deleteContact}
+        />
       </div>
     );
   }
