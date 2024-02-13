@@ -5,9 +5,11 @@ export default class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
 
   nameImputId = shortid.generate();
+  numberImputId = shortid.generate();
 
   hendleImputChange = event => {
     const { name, value } = event.currentTarget;
@@ -18,10 +20,11 @@ export default class App extends Component {
   hendleSubmit = event => {
     event.preventDefault();
 
-    const { name } = this.state;
+    const { name, number } = this.state;
     const newContact = {
       id: shortid.generate(),
       name: name,
+      number: number,
     };
 
     this.formOnSubmitContact(newContact);
@@ -43,11 +46,12 @@ export default class App extends Component {
 
   reset = () => {
     this.setState({ name: '' });
+    this.setState({ number: '' });
   };
 
   render() {
     const { hendleSubmit, hendleImputChange, nameImputId } = this;
-    const { contacts, name } = this.state;
+    const { contacts, name, number } = this.state;
 
     return (
       <div>
@@ -63,13 +67,25 @@ export default class App extends Component {
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
           />
+          <label htmlFor={this.numberImputId}>Number</label>
+          <input
+            type="tel"
+            name="number"
+            value={number}
+            onChange={hendleImputChange}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+          />
           <button type="submit">Add contact</button>
         </form>
         <h2>Contacts</h2>
         <ul>
-          {contacts.map(({ name, id }) => (
+          {contacts.map(({ name, id, number }) => (
             <li key={id}>
-              <p>{name}</p>
+              <p>
+                {name}:&nbsp; {number}
+              </p>
             </li>
           ))}
         </ul>
