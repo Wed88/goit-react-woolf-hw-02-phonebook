@@ -54,10 +54,12 @@ export default class App extends Component {
         <ContactForm onSubmitContact={formOnSubmitContact} />
         <h2>Contacts</h2>
         <Filter id={filterImputId} value={filter} changeFilter={changeFilter} />
-        <ContactList
-          contacts={visibledContacts}
-          onDeleteContact={deleteContact}
-        />
+        {contacts.length > 0 && (
+          <ContactList
+            contacts={visibledContacts}
+            onDeleteContact={deleteContact}
+          />
+        )}
       </div>
     );
   }
